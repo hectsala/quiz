@@ -5,7 +5,7 @@ body             { background: #333; }
 h2 span, section h3, label.rem 
                     { display: none; }
 body                { font-size: xx-large; }
-input, button       { font-size: x-large; }
+input, button, select { font-size: x-large; }
 footer              { font-size: large; }
 
 #foto               { padding-top: 5px; }
