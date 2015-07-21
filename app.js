@@ -28,6 +28,21 @@ app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Destruir sesion
+app.use(function(req, res, next){
+  var destruir = 2*60*1000;
+  var now = new Date().getTime();
+
+  if (req.session && req.session.anterior) {
+     var transcurrido = now - req.session.anterior;
+     if (destruir <= transcurrido) {
+        delete req.session.user;
+     }
+  }
+  req.session.anterior = now;
+  next();
+});
+
 // Helpers dinamicos:
 app.use(function(req, res, next) {
 
@@ -75,6 +90,5 @@ app.use(function(err, req, res, next) {
         errors: []
     });
 });
-
 
 module.exports = app;
